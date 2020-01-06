@@ -20,6 +20,7 @@ const UserCompany = require('simpfleet_models/models/UserCompany');
 const JobPrice = require('simpfleet_models/models/JobPrice');
 const IdIndex = require('simpfleet_models/models/IdIndex');
 const VesselLoadingLocation = require('simpfleet_models/models/VesselLoadingLocation');
+const LogisticsCompany = require('simpfleet_models/models/LogisticsCompany');
 
 const keys = require('./config/keys');
 
@@ -53,7 +54,7 @@ async function listenBroadcast() {
                 if(key && key === CALLBACK_KEY) {
                     let jobAssignment = await JobAssignment.findOne({job: jobId}).select();
                     if(jobAssignment.status !== STATUS_ASSIGNED) {
-                        jobAssignment.logisticsCompany = logisticsCompanyId;
+                        jobAssignment.logisticsCompany = await LogisticsCompany.findOne({_id: logisticsCompanyId}).select();
                         jobAssignment.status = STATUS_ASSIGNED;
                         await jobAssignment.save();
                         console.log(jobAssignment);
