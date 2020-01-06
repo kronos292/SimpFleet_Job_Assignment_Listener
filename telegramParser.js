@@ -37,27 +37,33 @@ const STATUS_PENDING = 'Pending';
 
 async function listenBroadcast() {
     try {
+        // Get updates from Telegram bot
         const res = await axios.get(`https://api.telegram.org/bot${keys.SIMPFLEET_TELEGRAM_BOT_TOKEN}/getUpdates`);
         const updates = res.data;
         const results = updates.result;
 
+        // Parse through all the results
         for(let i = 0; i < results.length; i++) {
             const result = results[i];
+
+            // Filter the callback query results
             const {callback_query} = result;
             if(callback_query) {
-               const {data} = callback_query;
-               const callback_query_data = data.split(" ");
-               const key = callback_query_data[0];
-               const logisticsCompanyId = callback_query_data[1];
-               const jobId = callback_query_data[2];
+                // Filter the callback query data
+                const {data} = callback_query;
+                const callback_query_data = data.split(" ");
+                const key = callback_query_data[0];
+                const logisticsCompanyId = callback_query_data[1];
+                const jobId = callback_query_data[2];
 
+                // Validate that it is the correct callback data
                 if(key && key === CALLBACK_KEY) {
+                    // Get the job assignment involved and assign the logistics company
                     let jobAssignment = await JobAssignment.findOne({job: jobId}).select();
                     if(jobAssignment.status !== STATUS_ASSIGNED) {
                         jobAssignment.logisticsCompany = await LogisticsCompany.findOne({_id: logisticsCompanyId}).select();
                         jobAssignment.status = STATUS_ASSIGNED;
                         await jobAssignment.save();
-                        console.log(jobAssignment);
 
                         // Send job booking info to 3PL telegram chat
                         const job = await Job.findOne({_id: jobId}).populate({
