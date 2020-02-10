@@ -11,7 +11,6 @@ const Vessel = require('simpfleet_models/models/Vessel');
 const JobTracker = require('simpfleet_models/models/JobTracker');
 const PaymentTracker = require('simpfleet_models/models/PaymentTracker');
 const User = require('simpfleet_models/models/User');
-const JobItemPricing = require('simpfleet_models/models/JobItemPricing');
 const Notification = require('simpfleet_models/models/Notification');
 const PSAVessel = require('simpfleet_models/models/PSAVessel');
 const PickupLocation = require('simpfleet_models/models/PickupLocation');

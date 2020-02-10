@@ -22,7 +22,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --max-old-space-size=8192 index.js",
     "dev": "node run.js",
-    "deploy": "git checkout aws-deploy && git merge master && git push origin aws-deploy --verbose && eb deploy --verbose && git checkout master"
+    "deploy": "git checkout aws-deploy && git merge master && git push origin aws-deploy --verbose && eb deploy --verbose && git checkout master",
+    "models-update": "npm un git+https://github.com/kronos292/SimpFleet_Models.git && npm i git+https://github.com/kronos292/SimpFleet_Models.git#version2.1"
   },
   "author": "",
   "license": "ISC"
