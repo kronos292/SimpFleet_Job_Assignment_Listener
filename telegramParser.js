@@ -16,7 +16,6 @@ const PSAVessel = require('simpfleet_models/models/PSAVessel');
 const PickupLocation = require('simpfleet_models/models/PickupLocation');
 const PickupDetail = require('simpfleet_models/models/PickupDetail');
 const UserCompany = require('simpfleet_models/models/UserCompany');
-const JobPrice = require('simpfleet_models/models/JobPrice');
 const IdIndex = require('simpfleet_models/models/IdIndex');
 const VesselLoadingLocation = require('simpfleet_models/models/VesselLoadingLocation');
 const LogisticsCompany = require('simpfleet_models/models/LogisticsCompany');
